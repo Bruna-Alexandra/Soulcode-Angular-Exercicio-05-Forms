@@ -22,6 +22,7 @@ export class TemplateComponent {
   telefone: string = ''
   endereco: string = ''
   complemento: string = ''
+  form: any
 
 
 

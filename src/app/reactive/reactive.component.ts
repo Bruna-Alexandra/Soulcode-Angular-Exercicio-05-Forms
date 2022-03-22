@@ -61,5 +61,9 @@ export class ReactiveComponent {
     ref.componentInstance.telefone = this.Dados.controls['telefone'].value
     ref.componentInstance.endereco = this.Dados.controls['endereco'].value
     ref.componentInstance.complemento = this.Dados.controls['complemento'].value
+
+    this.Dados.reset()
   }
+
+
 }

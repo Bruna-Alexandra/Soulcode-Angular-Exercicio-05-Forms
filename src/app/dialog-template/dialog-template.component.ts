@@ -17,6 +17,7 @@ export class DialogTemplateComponent implements OnInit {
   complemento: string = ''
 
   constructor() { }
+  
 
   ngOnInit(): void {
   }
