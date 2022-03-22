@@ -1,5 +1,7 @@
+import { DialogReactiveComponent } from './../dialog-reactive/dialog-reactive.component';
 import { Component, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -8,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./reactive.component.css']
 })
 export class ReactiveComponent {
-  mostrarDialog: boolean = false
+/*   mostrarDialog: boolean = false */
   senhasDesiguais: boolean = false
   botaoLigado: boolean = false
 
@@ -31,7 +33,6 @@ export class ReactiveComponent {
       this.botaoLigado = true
     }
     console.log('senha desigual: '+ this.senhasDesiguais)
-    /* console.log('botão ' + this.botaoLigado) */
   }
 
   Dados: FormGroup = new FormGroup({
@@ -39,24 +40,32 @@ export class ReactiveComponent {
     sobrenome: new FormControl('', [Validators.required, Validators.minLength(3)]),
     usuario: new FormControl(''),
     senha1: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    senha2: new FormControl('', [Validators.required]),
+    senha2: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
     cpf: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-    telefone: new FormControl(''),
-    endereco: new FormControl(''),
-    complemento: new FormControl('')
+    telefone: new FormControl('', [Validators.maxLength(12)]),
+    endereco: new FormControl('', [Validators.maxLength(50)]),
+    complemento: new FormControl('', [Validators.maxLength(20)])
   })
 
   /*   -------------------------------------------------- */
   constructor(
     private snack: MatSnackBar,
-  ) { }
+    private dialog: MatDialog
+  ) {}
 
-  enviar(): void {
-    console.log('cadastrado')
-    console.log(`Name: ${this.Dados.controls['nome'].value}`)
-    console.log(`Name: ${this.Dados.controls['sobrenome'].value}`)
-    console.log(`Dados: ${this.Dados.controls}`)
-    this.snack.open('Você foi cadastrado', 'Ok', { duration: 3000 })
-    this.mostrarDialog = true
+  mostrarDialog(): void {
+    let ref = this.dialog.open(
+      DialogReactiveComponent
+    )
+
+    ref.componentInstance.nome = this.Dados.controls['nome'].value
+    ref.componentInstance.sobrenome = this.Dados.controls['sobrenome'].value
+    ref.componentInstance.usuario = this.Dados.controls['usuario'].value
+    ref.componentInstance.senha1 = this.Dados.controls['senha1'].value
+    ref.componentInstance.senha2 = this.Dados.controls['senha1'].value
+    ref.componentInstance.cpf = this.Dados.controls['cpf'].value
+    ref.componentInstance.telefone = this.Dados.controls['telefone'].value
+    ref.componentInstance.endereco = this.Dados.controls['endereco'].value
+    ref.componentInstance.complemento = this.Dados.controls['complemento'].value
   }
 }

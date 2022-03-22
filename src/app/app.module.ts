@@ -8,12 +8,16 @@ import { TemplateComponent } from './template/template.component';
 import { ReactiveComponent } from './reactive/reactive.component';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DialogReactiveComponent } from './dialog-reactive/dialog-reactive.component';
+import { DialogTemplateComponent } from './dialog-template/dialog-template.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TemplateComponent,
-    ReactiveComponent
+    ReactiveComponent,
+    DialogReactiveComponent,
+    DialogTemplateComponent
   ],
   imports: [
     BrowserModule,

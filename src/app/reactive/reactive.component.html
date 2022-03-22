@@ -3,7 +3,7 @@
     <mat-card-title>Cadastre-se!</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form action="#" class="main-form" (ngSubmit)="enviar()" [formGroup]="Dados">
+    <form action="#" class="main-form" (ngSubmit)="mostrarDialog()" [formGroup]="Dados">
       <!-- nome e sobrenome -->
       <div class="form-row">
         <mat-form-field appearance="fill">
@@ -48,8 +48,9 @@
             <span *ngIf="Dados.controls['senha1'].getError('required')">Este campo é obrigatório</span>
             <span *ngIf="Dados.controls['senha1'].getError('minlength')">Mínimo de 8 caracteres</span>
           </mat-error>
+          
         </mat-form-field>
-
+        <div class="senha2">
         <mat-form-field appearance="fill">
           <mat-label>Repita sua senha</mat-label>
           <input (input)="changes()" 
@@ -60,11 +61,12 @@
           formControlName="senha2"
           maxlength="8"
           >
-          <mat-error>
-            <span *ngIf="Dados.controls['senha2'].getError('required')">Repita sua senha. </span>
-            <span *ngIf="senhasDesiguais==true">As senhas não são iguais. </span>
-          </mat-error>
+<!--           <mat-error>
+            <span *ngIf="senhasDesiguais===true">As senhas não são iguais.</span>
+          </mat-error> -->
         </mat-form-field>
+        <span *ngIf="senhasDesiguais===true">As senhas não são iguais.</span>
+      </div>
       </div>
       <!-- =============================================================================== -->
       <!-- cpf e telefone -->
@@ -108,7 +110,7 @@
 
 </mat-card>
 
-<mat-card class="dialog" *ngIf="mostrarDialog">
+<!-- <mat-card class="dialog" *ngIf="mostrarDialog">
   <mat-dialog-content>
     <p>Nome: {{Dados.controls['nome'].value}}</p>
     <p>Sobrenome: {{Dados.controls['sobrenome'].value}}</p>
@@ -119,4 +121,4 @@
     <p>Endereço: {{Dados.controls['endereco'].value}}</p>
     <p>Complemento: {{Dados.controls['complemento'].value}}</p>
   </mat-dialog-content>
-</mat-card>
+</mat-card> -->
