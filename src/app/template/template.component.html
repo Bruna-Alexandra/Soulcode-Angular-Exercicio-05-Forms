@@ -1,0 +1,119 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Cadastre-se!</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form action="#" class="main-form" (ngSubmit)="enviar()">
+      <!-- nome e sobrenome -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input [ngModel]="nome" name="nome" type="text" matInput placeholder="Seu nome..." (input)="changes()" required>
+          <mat-error>
+<!--             <span *ngIf="">ampo é obrigatório</span>
+            <span *ngIf="">o de 3 caracteres</span> -->
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Sobrenome</mat-label>
+          <input [ngModel]="sobrenome" name="sobrenome" type="text" matInput placeholder="Seu sobrenome..." autocomplete="false" required>
+          <mat-error>
+            <span *ngIf="">Este campo é obrigatório</span>
+            <span *ngIf="">Mínimo de 3 caracteres</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- =============================================================================== -->
+      <!-- nome de usuário -->
+      <!-- =============================================================================== -->
+      <div class="form-row col single">
+        <mat-form-field appearance="fill" class="grow">
+          <mat-label>Nome de usuário</mat-label>
+          <input [ngModel]="usuario" name="usuario" type="text" matInput placeholder="Ex.: User123" autocomplete="false" >
+          <mat-error>
+            <span *ngIf="">Este campo é obrigatório</span>
+            <span *ngIf="">Mínimo de 5 caracteres</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- =============================================================================== -->
+      <!-- senhas -->
+      <!-- =============================================================================== -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Senha</mat-label>
+          <input [ngModel]="senha1" name="senha1" (input)="changes()" type="password" matInput placeholder="********"  (input)="changes()">
+          <mat-error>
+            <span *ngIf="">Este campo é obrigatório</span>
+            <span *ngIf="">Mínimo de 8 caracteres</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Repita sua senha</mat-label>
+          <input [ngModel]="senha2" name="senha2" (input)="changes()" type="password" matInput placeholder="********" autocomplete="false" 
+          (input)="changes()"
+          >
+          <mat-error>
+            <span *ngIf="">Repita sua senha.</span>
+            <span *ngIf="senhasDesiguais==true">As senhas não são iguais.</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- =============================================================================== -->
+      <!-- cpf e telefone -->
+      <!-- =============================================================================== -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>CPF</mat-label>
+          <input [ngModel]="senha2" name="cpf" type="text" matInput placeholder="000.000.000-00"  maxlength="11"> 
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Telefone</mat-label>
+          <input [ngModel]="senha2" name="telefone" type="tel" matInput placeholder="(00)0000-0000" autocomplete="false"  maxlength="11"> 
+        </mat-form-field>
+      </div>
+      <!-- =============================================================================== -->
+      <!-- endereço e complemento -->
+      <!-- =============================================================================== -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Endereço</mat-label>
+          <input [ngModel]="senha2" name="endereco" type="text" matInput placeholder="Nº, Rua, Bairro" >
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Complemento</mat-label>
+          <input [ngModel]="senha2" name="complemento" type="text" matInput placeholder="" autocomplete="false" >
+        </mat-form-field>
+      </div>
+      <!-- =============================================================================== -->
+      <!-- botão submit -->
+      <!-- =============================================================================== -->
+      <div class="form-row col">
+        <button mat-raised-button type="submit" color="accent" class="grow"
+        [disabled]="botaoSwitcher==false"
+        
+        >
+        <!-- [disabled]="Dados.invalid" -->
+          Cadastrar</button>
+      </div>
+    </form>
+  </mat-card-content>
+
+</mat-card>
+
+<mat-card class="dialog" *ngIf="mostrar">
+  <mat-dialog-content>
+    <p>Nome: {{nome}}</p>
+    <p>Sobrenome: {{sobrenome}}</p>
+    <p>Nome de usuário: {{usuario}}</p>
+    <p>Senha: {{senha1}}</p>
+    <p>Cpf: {{cpf}}</p>
+    <p>Telefone: {{telefone}}</p>
+    <p>Endereço: {{endereco}}</p>
+    <p>Complemento: {{complemento}}</p>
+  </mat-dialog-content>
+</mat-card>

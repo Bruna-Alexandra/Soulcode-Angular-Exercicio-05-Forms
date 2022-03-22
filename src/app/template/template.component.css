@@ -1,0 +1,21 @@
+/* .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+} */
+
+.main-form{
+    width: 500px;
+    margin-top: 30px;
+}
+
+.form-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.grow{
+    width: 100%;
+}

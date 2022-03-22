@@ -1,0 +1,122 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Cadastre-se!</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form action="#" class="main-form" (ngSubmit)="enviar()" [formGroup]="Dados">
+      <!-- nome e sobrenome -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input (input)="changes()" type="text" matInput placeholder="Seu nome..." formControlName="nome" >
+          <mat-error>
+            <span *ngIf="Dados.controls['nome'].getError('required')">Este campo é obrigatório</span>
+            <span *ngIf="Dados.controls['nome'].getError('minlength')">Mínimo de 3 caracteres</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Sobrenome</mat-label>
+          <input (input)="changes()" type="text" matInput placeholder="Seu sobrenome..." autocomplete="false" formControlName="sobrenome">
+          <mat-error>
+            <span *ngIf="Dados.controls['sobrenome'].getError('required')">Este campo é obrigatório</span>
+            <span *ngIf="Dados.controls['sobrenome'].getError('minlength')">Mínimo de 3 caracteres</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- =============================================================================== -->
+      <!-- nome de usuário -->
+      <!-- =============================================================================== -->
+      <div class="form-row col single">
+        <mat-form-field appearance="fill" class="grow">
+          <mat-label>Nome de usuário</mat-label>
+          <input (input)="changes()" type="text" matInput placeholder="Ex.: User123" autocomplete="false" formControlName="usuario">
+          <mat-error>
+            <span *ngIf="Dados.controls['usuario'].getError('required')">Este campo é obrigatório</span>
+            <span *ngIf="Dados.controls['usuario'].getError('minlength')">Mínimo de 5 caracteres</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- =============================================================================== -->
+      <!-- senhas -->
+      <!-- =============================================================================== -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Senha</mat-label>
+          <input (input)="changes()" type="password" maxlength="8" matInput placeholder="********" formControlName="senha1">
+          <mat-error>
+            <span *ngIf="Dados.controls['senha1'].getError('required')">Este campo é obrigatório</span>
+            <span *ngIf="Dados.controls['senha1'].getError('minlength')">Mínimo de 8 caracteres</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Repita sua senha</mat-label>
+          <input (input)="changes()" 
+          required
+          type="password" 
+          matInput placeholder="********" 
+          autocomplete="false" 
+          formControlName="senha2"
+          maxlength="8"
+          >
+          <mat-error>
+            <span *ngIf="Dados.controls['senha2'].getError('required')">Repita sua senha. </span>
+            <span *ngIf="senhasDesiguais==true">As senhas não são iguais. </span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <!-- =============================================================================== -->
+      <!-- cpf e telefone -->
+      <!-- =============================================================================== -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>CPF</mat-label>
+          <input (input)="changes()" type="text" matInput placeholder="000.000.000-00" formControlName="cpf" maxlength="11"> 
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Telefone</mat-label>
+          <input (input)="changes()" type="tel" matInput placeholder="(00)0000-0000" autocomplete="false" formControlName="telefone"> 
+        </mat-form-field>
+      </div>
+      <!-- =============================================================================== -->
+      <!-- endereço e complemento -->
+      <!-- =============================================================================== -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Endereço</mat-label>
+          <input (input)="changes()" type="text" matInput placeholder="Nº, Rua, Bairro" formControlName="endereco">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Complemento</mat-label>
+          <input (input)="changes()" type="text" matInput placeholder="" autocomplete="false" formControlName="complemento">
+        </mat-form-field>
+      </div>
+      <!-- =============================================================================== -->
+      <!-- botão submit -->
+      <!-- =============================================================================== -->
+      <div class="form-row col">
+        <button mat-raised-button type="submit" color="accent" class="grow"
+        [disabled]="botaoLigado==false"
+        >
+          Cadastrar</button>
+      </div>
+    </form>
+  </mat-card-content>
+
+</mat-card>
+
+<mat-card class="dialog" *ngIf="mostrarDialog">
+  <mat-dialog-content>
+    <p>Nome: {{Dados.controls['nome'].value}}</p>
+    <p>Sobrenome: {{Dados.controls['sobrenome'].value}}</p>
+    <p>Nome de usuário: {{Dados.controls['usuario'].value}}</p>
+    <p>Senha: {{Dados.controls['senha1'].value}}</p>
+    <p>Cpf: {{Dados.controls['cpf'].value}}</p>
+    <p>Telefone: {{Dados.controls['telefone'].value}}</p>
+    <p>Endereço: {{Dados.controls['endereco'].value}}</p>
+    <p>Complemento: {{Dados.controls['complemento'].value}}</p>
+  </mat-dialog-content>
+</mat-card>
