@@ -1,6 +1,8 @@
+import { DialogTemplateComponent } from './../dialog-template/dialog-template.component';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-template',
@@ -8,9 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./template.component.css']
 })
 export class TemplateComponent {
-  mostrar: boolean = false
-  senhasDesiguais: boolean = true
-  botaoSwitcher: boolean = false
+  senhasDesiguais: boolean = false
+  botaoLigado: boolean = false
 
   nome: string = ''
   sobrenome: string = ''
@@ -22,34 +23,44 @@ export class TemplateComponent {
   endereco: string = ''
   complemento: string = ''
 
+
+
   changes(): void {
 
-    if (this.senha1 == this.senha2){
+    if (this.senha1 === this.senha2){
       this.senhasDesiguais = false
     }else{
       this.senhasDesiguais = true
 
     }
     if (this.senhasDesiguais == true){
-    }/* else if (this.Dados.invalid == true){
-      this.botaoSwitcher = false
-    }    */ 
-    else{
-      this.botaoSwitcher = true
+      this.botaoLigado = false
     }
-    console.log('botão ' + this.botaoSwitcher)
+    else{
+      this.botaoLigado = true
+    }
+    console.log('senha desigual: '+ this.senhasDesiguais)
   }
-
 
 /*   -------------------------------------------------- */
 constructor(
-  private snack: MatSnackBar,
+  private dialog: MatDialog
   ){}
 
-  enviar(): void {
-    console.log('cadastrado')
+  mostrarDialog(): void {
+    let dialogT = this.dialog.open(
+      DialogTemplateComponent
+    )
+    dialogT.componentInstance.nome = this.nome
+    dialogT.componentInstance.sobrenome = this.sobrenome
+    dialogT.componentInstance.usuario = this.usuario
+    dialogT.componentInstance.senha1 = this.senha1
+    dialogT.componentInstance.senha2 = this.senha1
+    dialogT.componentInstance.cpf = this.cpf
+    dialogT.componentInstance.telefone = this.telefone
+    dialogT.componentInstance.endereco = this.endereco
+    dialogT.componentInstance.complemento = this.complemento
+  }
 
-    this.snack.open('Você foi cadastrado', 'Ok', {duration: 3000})
- }
 }
 

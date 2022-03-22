@@ -15,9 +15,6 @@ export class ReactiveComponent {
   botaoLigado: boolean = false
 
   changes(): void {
-    console.log('senha1: '+ this.Dados.controls['senha1'].value)
-    console.log('senha2: '+ this.Dados.controls['senha2'].value)
-
     if (this.Dados.controls['senha1'].value === this.Dados.controls['senha2'].value){
       this.senhasDesiguais = false
     }else{
@@ -32,7 +29,6 @@ export class ReactiveComponent {
     else{
       this.botaoLigado = true
     }
-    console.log('senha desigual: '+ this.senhasDesiguais)
   }
 
   Dados: FormGroup = new FormGroup({
@@ -49,7 +45,6 @@ export class ReactiveComponent {
 
   /*   -------------------------------------------------- */
   constructor(
-    private snack: MatSnackBar,
     private dialog: MatDialog
   ) {}
 
@@ -57,7 +52,6 @@ export class ReactiveComponent {
     let ref = this.dialog.open(
       DialogReactiveComponent
     )
-
     ref.componentInstance.nome = this.Dados.controls['nome'].value
     ref.componentInstance.sobrenome = this.Dados.controls['sobrenome'].value
     ref.componentInstance.usuario = this.Dados.controls['usuario'].value
