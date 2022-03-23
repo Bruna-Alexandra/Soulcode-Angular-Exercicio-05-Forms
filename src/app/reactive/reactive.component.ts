@@ -37,8 +37,8 @@ export class ReactiveComponent {
     usuario: new FormControl(''),
     senha1: new FormControl('', [Validators.required, Validators.minLength(8)]),
     senha2: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
-    cpf: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-    telefone: new FormControl('', [Validators.maxLength(12)]),
+    cpf: new FormControl('', [Validators.minLength(11), Validators.maxLength(11)]),
+    telefone: new FormControl('', [Validators.minLength(10), Validators.maxLength(12)]),
     endereco: new FormControl('', [Validators.maxLength(50)]),
     complemento: new FormControl('', [Validators.maxLength(20)])
   })

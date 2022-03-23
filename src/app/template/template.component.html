@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Cadastre-se!</mat-card-title>
+    <mat-card-title>Cadastre-se</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form [(ngModel)]="form" action="#" class="main-form" (ngSubmit)="mostrarDialog(); form.reset()">
@@ -8,20 +8,22 @@
       <div class="form-row">
         <mat-form-field appearance="fill">
           <mat-label>Nome</mat-label>
-          <input [(ngModel)]="nome" name="nome" type="text" matInput placeholder="Seu nome..." (input)="changes()" required>
-          <mat-error>
-            <span *ngIf="">Este campo é obrigatório</span>
-            <span *ngIf="">Minimo de 3 caracteres</span>
-          </mat-error>
+          <input required minlength="3" [(ngModel)]="nome" name="nome" type="text" matInput placeholder="Seu nome..."
+            (input)="changes()" minlength="3" #iptNome="ngModel">
+            <mat-error>
+              <span *ngIf="iptNome.errors?.['required']">Este campo é obrigatório</span>
+              <span *ngIf="iptNome.errors?.['minlength']">Mínimo de 3 caracteres</span>
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Sobrenome</mat-label>
-          <input [(ngModel)]="sobrenome" name="sobrenome" type="text" matInput placeholder="Seu sobrenome..." autocomplete="false" required>
-          <mat-error>
-            <span *ngIf="">Este campo é obrigatório</span>
-            <span *ngIf="">Mínimo de 3 caracteres</span>
-          </mat-error>
+          <input required minlength="3" [(ngModel)]="sobrenome" name="sobrenome" type="text" matInput
+            placeholder="Seu sobrenome..." autocomplete="false" required #iptSobrenome="ngModel">
+            <mat-error>
+              <span *ngIf="iptSobrenome.errors?.['required']">Este campo é obrigatório</span>
+              <span *ngIf="iptSobrenome.errors?.['minlength']">Mínimo de 3 caracteres</span>
+            </mat-error>
         </mat-form-field>
       </div>
       <!-- =============================================================================== -->
@@ -30,11 +32,12 @@
       <div class="form-row col single">
         <mat-form-field appearance="fill" class="grow">
           <mat-label>Nome de usuário</mat-label>
-          <input [(ngModel)]="usuario" name="usuario" type="text" matInput placeholder="Ex.: User123" autocomplete="false" >
-          <mat-error>
-            <span *ngIf="">Este campo é obrigatório</span>
-            <span *ngIf="">Mínimo de 5 caracteres</span>
-          </mat-error>
+          <input required minlength="5" [(ngModel)]="usuario" name="usuario" type="text" matInput
+            placeholder="Ex.: User123" autocomplete="false" #inputUsuario="ngModel">
+            <mat-error>
+              <span *ngIf="inputUsuario.errors?.['required']">Este campo é obrigatório</span>
+              <span *ngIf="inputUsuario.errors?.['minlength']">Mínimo de 5 caracteres</span>
+            </mat-error>
         </mat-form-field>
       </div>
       <!-- =============================================================================== -->
@@ -43,23 +46,25 @@
       <div class="form-row">
         <mat-form-field appearance="fill">
           <mat-label>Senha</mat-label>
-          <input [(ngModel)]="senha1" name="senha1" (input)="changes()" type="password" matInput placeholder="********"  (input)="changes()">
+          <input required minlength="8" maxlength="8" [(ngModel)]="senha1" name="senha1" (input)="changes()" type="password" matInput
+            placeholder="********" (input)="changes()" #inputSenha1="ngModel">
           <mat-error>
-            <span *ngIf="">Este campo é obrigatório</span>
-            <span *ngIf="">Mínimo de 8 caracteres</span>
+            <span *ngIf="inputSenha1.errors?.['required']">Este campo é obrigatório</span>
+            <span *ngIf="inputSenha1.errors?.['minlength']">Mínimo de 8 caracteres</span>
           </mat-error>
         </mat-form-field>
 
+        <div class="senha2">
         <mat-form-field appearance="fill">
           <mat-label>Repita sua senha</mat-label>
-          <input [(ngModel)]="senha2" name="senha2" (input)="changes()" type="password" matInput placeholder="********" autocomplete="false" 
-          (input)="changes()"
-          >
-          <mat-error>
+          <input required minlength="8" maxlength="8" [(ngModel)]="senha2" name="senha2" (input)="changes()" type="password" matInput
+            placeholder="********" autocomplete="false" (input)="changes()">
+          <!--           <mat-error>
             <span *ngIf="">Repita sua senha.</span>
-            <span *ngIf="senhasDesiguais==true">As senhas não são iguais.</span>
-          </mat-error>
+          </mat-error> -->
         </mat-form-field>
+        <span *ngIf="senhasDesiguais===true">As senhas não são iguais.</span>
+        </div>
       </div>
       <!-- =============================================================================== -->
       <!-- cpf e telefone -->
@@ -67,12 +72,14 @@
       <div class="form-row">
         <mat-form-field appearance="fill">
           <mat-label>CPF</mat-label>
-          <input [(ngModel)]="cpf" name="cpf" type="text" matInput placeholder="000.000.000-00"  maxlength="11"> 
+          <input minlength="11" [(ngModel)]="cpf" name="cpf" type="text" matInput placeholder="000.000.000-00"
+            maxlength="11">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Telefone</mat-label>
-          <input [(ngModel)]="telefone" name="telefone" type="tel" matInput placeholder="(00)0000-0000" autocomplete="false"  maxlength="11"> 
+          <input minlength="10" [(ngModel)]="telefone" name="telefone" type="tel" matInput placeholder="(00)0000-0000"
+            autocomplete="false" maxlength="11">
         </mat-form-field>
       </div>
       <!-- =============================================================================== -->
@@ -81,24 +88,23 @@
       <div class="form-row">
         <mat-form-field appearance="fill">
           <mat-label>Endereço</mat-label>
-          <input [(ngModel)]="endereco" name="endereco" type="text" matInput placeholder="Nº, Rua, Bairro" >
+          <input [(ngModel)]="endereco" name="endereco" type="text" matInput placeholder="Nº, Rua, Bairro">
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Complemento</mat-label>
-          <input [(ngModel)]="complemento" name="complemento" type="text" matInput placeholder="" autocomplete="false" >
+          <input [(ngModel)]="complemento" name="complemento" type="text" matInput placeholder="" autocomplete="false">
         </mat-form-field>
       </div>
       <!-- =============================================================================== -->
       <!-- botão submit -->
       <!-- =============================================================================== -->
       <div class="form-row col">
-        <button mat-raised-button type="submit" color="accent" class="grow"
-        [disabled]="botaoLigado==false"
-        
-        >
-        <!-- [disabled]="Dados.invalid" -->
-          Cadastrar</button>
+        <button mat-raised-button type="submit" color="accent" class="grow" 
+        [disabled]="botaoLigado==false || iptNome.valid == false || inputSenha1.valid == false || iptSobrenome.valid == false">
+
+          Cadastrar
+        </button>
       </div>
     </form>
   </mat-card-content>
