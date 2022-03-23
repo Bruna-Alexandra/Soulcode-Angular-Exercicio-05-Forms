@@ -34,7 +34,7 @@ export class ReactiveComponent {
   Dados: FormGroup = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
     sobrenome: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    usuario: new FormControl(''),
+    usuario: new FormControl('', [Validators.required, Validators.minLength(5)]),
     senha1: new FormControl('', [Validators.required, Validators.minLength(8)]),
     senha2: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
     cpf: new FormControl('', [Validators.minLength(11), Validators.maxLength(11)]),
